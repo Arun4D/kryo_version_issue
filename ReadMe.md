@@ -1,72 +1,37 @@
-# Read Me First
-
 # Getting Started
 
-This sample project to setup Redis cache with spring boot + java.
+This sample project to test Kryo Object write to file in one version and read from another version.
 
-## Requirement
-* Java 11
-* Spring boot 2.6.4
-* Lombok
-* Redis latest version (local / Docker)
-
-## Curl
-
-APIs cache the H2 database entity values
+This to replicate Serialization trace on date
 
 ````
-curl -X GET  http://localhost:8080/rest/api/sample/all
-
-curl -X GET  http://localhost:8080/rest/api/sample/2
-
-curl -X POST  http://localhost:8080/rest/api/sample/ -d '{"startDate":"2022-03-17"}' -H "Content-Type: application/json"
-
-curl -X DELETE  http://localhost:8080/rest/api/sample/3 -H "Content-Type: application/json"
-
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.esotericsoftware.reflectasm.AccessClassLoader (file:/home/arun/.gradle/caches/modules-2/files-2.1/com.esotericsoftware.kryo/kryo/2.21/9a4e69cff8d225729656f7e97e40893b23bffef/kryo-2.21.jar) to method java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int)
+WARNING: Please consider reporting this to the maintainers of com.esotericsoftware.reflectasm.AccessClassLoader
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Exception in thread "main" com.esotericsoftware.kryo.KryoException: Unable to find class: 
+                                                                                          java.util.Date
+Serialization trace:
+map (in.co.ad.kryosample.KryoTest$SomeClassMap)
+        at com.esotericsoftware.kryo.util.DefaultClassResolver.readName(DefaultClassResolver.java:138)
+        at com.esotericsoftware.kryo.util.DefaultClassResolver.readClass(DefaultClassResolver.java:115)
+        at com.esotericsoftware.kryo.Kryo.readClass(Kryo.java:610)
+        at com.esotericsoftware.kryo.Kryo.readClassAndObject(Kryo.java:721)
+        at com.esotericsoftware.kryo.serializers.MapSerializer.read(MapSerializer.java:134)
+        at com.esotericsoftware.kryo.serializers.MapSerializer.read(MapSerializer.java:17)
+        at com.esotericsoftware.kryo.Kryo.readObject(Kryo.java:648)
+        at com.esotericsoftware.kryo.serializers.FieldSerializer$ObjectField.read(FieldSerializer.java:605)
+        at com.esotericsoftware.kryo.serializers.FieldSerializer.read(FieldSerializer.java:221)
+        at com.esotericsoftware.kryo.Kryo.readObject(Kryo.java:626)
+        at in.co.ad.kryosample.KryoTest.main(KryoTest.java:34)
+Caused by: java.lang.ClassNotFoundException: 
+                                             java.util.Date
+        at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:581)
+        at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:178)
+        at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:522)
+        at java.base/java.lang.Class.forName0(Native Method)
+        at java.base/java.lang.Class.forName(Class.java:398)
+        at com.esotericsoftware.kryo.util.DefaultClassResolver.readName(DefaultClassResolver.java:136)
+        ... 10 more
 ````
-
-## Redis-cli Command
-
-Run redis-cli
-````
-docker exec -it redis redis-cli
-````
-Flush all date in redis.
-````
-FLUSHDB
-````
-
-List of all keys
-
-````
-KEYS *
-````
-Get value for key
-
-````
-MGET "sample::3"
-
-//for list
-MGET "sampleList::SimpleKey []" 
-````
-
-### Reference Documentation
-For further reference, please consider the following sections:
-
-* [Official Gradle documentation](https://docs.gradle.org)
-* [Spring Boot Gradle Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.6.4/gradle-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.6.4/gradle-plugin/reference/html/#build-image)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/2.6.4/reference/htmlsingle/#boot-features-developing-web-applications)
-
-### Guides
-The following guides illustrate how to use some features concretely:
-
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
-
-### Additional Links
-These additional references should also help you:
-
-* [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
-
