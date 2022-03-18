@@ -17,9 +17,8 @@ repositories {
 }
 
 dependencies {
-	implementation group: 'com.esotericsoftware.kryo', name: 'kryo', version: '2.21'
-	//implementation group: 'com.esotericsoftware', name: 'kryo', version: '4.0.0'
-
+	implementation group: 'com.esotericsoftware', name: 'kryo', version: '4.0.0'
+	// implementation group: 'com.esotericsoftware.kryo', name: 'kryo', version: '2.21'
 }
 
 tasks.named('test') {

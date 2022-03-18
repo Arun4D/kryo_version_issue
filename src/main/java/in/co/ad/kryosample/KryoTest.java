@@ -14,7 +14,7 @@ public class KryoTest {
 
     static public void main(String[] args) throws Exception {
         Kryo kryo = new Kryo();
-        kryo.register(SomeClassMap.class);
+        kryo.register(SomeClass.class);
 
         SomeClass object = new SomeClass();
         object.value = new Date();
